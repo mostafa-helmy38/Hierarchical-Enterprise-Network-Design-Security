@@ -1,0 +1,65 @@
+en
+conf t
+hostname D-SW2
+ip routing
+vlan 10
+vlan 20
+vlan 30
+vlan 40
+name Guest
+vlan 5
+name Employee
+int range g0/1-2
+switchport mode trunk
+switchport trunk encapsulation dot1q
+int vlan 10
+no sh
+ip address 192.168.10.2 255.255.255.0
+standby version 2
+standby 10 ip 192.168.10.254
+ip helper-address 192.168.100.1
+int vlan 20
+no sh
+ip address 192.168.20.2 255.255.255.0
+standby version 2
+standby 20 ip 192.168.20.254
+ip helper-address 192.168.100.1
+int vlan 30
+no sh
+ip address 192.168.30.2 255.255.255.0
+standby version 2
+standby 30 ip 192.168.30.254
+ip helper-address 192.168.100.1
+int vlan 40
+no sh
+ip address 192.168.40.1 255.255.255.0
+standby version 2
+standby 40 ip 192.168.40.254
+ip helper-address 192.168.100.1
+int vlan 5
+no sh
+ip address 192.168.5.1 255.255.255.0
+standby version 2
+standby 5 ip 192.168.5.254
+ip helper-address 192.168.100.1
+int vlan 1
+no sh
+ip address 192.168.1.1 255.255.255.0
+standby version 2
+standby 1 ip 192.168.1.254
+ip helper-address 192.168.100.1
+int g1/0/4
+no switchport
+ip address 192.168.60.2 255.255.255.0
+int g1/0/5
+no switchport
+ip address 192.168.80.2 255.255.255.0
+router ospf 1
+network 192.168.10.0 0.0.0.255 area 0
+network 192.168.20.0 0.0.0.255 area 0
+network 192.168.30.0 0.0.0.255 area 0
+network 192.168.60.0 0.0.0.255 area 0
+network 192.168.80.0 0.0.0.255 area 0
+network 192.168.40.0 0.0.0.255 area 0
+network 192.168.5.0 0.0.0.255 area 0
+do wr

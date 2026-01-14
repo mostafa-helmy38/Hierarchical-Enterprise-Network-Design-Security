@@ -1,0 +1,63 @@
+en
+conf t
+hostname R1
+int f0/0
+no sh
+ip address 192.168.100.1 255.255.255.0
+int s1/0
+ip address 200.1.1.1 255.255.255.252
+no sh
+ip route 0.0.0.0 0.0.0.0 200.1.1.2
+access-list 1 permit any
+ip nat inside source list 1 interface FastEthernet0/0 overload
+router ospf 1
+network 192.168.100.0 0.0.0.255 area 0
+network 200.1.1.0 0.0.0.3 area 0
+ip dhcp excluded-address 192.168.10.1 192.168.10.4
+ip dhcp excluded-address 192.168.20.1 192.168.20.4
+ip dhcp excluded-address 192.168.30.1 192.168.30.4
+ip dhcp excluded-address 192.168.40.1 192.168.40.4
+ip dhcp excluded-address 192.168.5.1 192.168.5.4
+ip dhcp excluded-address 192.168.1.1 192.168.1.4
+ip dhcp pool vlan_10
+network 192.168.10.0 255.255.255.0
+default-router 192.168.10.254
+ip dhcp pool vlan_20
+network 192.168.20.0 255.255.255.0
+default-router 192.168.20.254
+ip dhcp pool vlan_30
+network 192.168.30.0 255.255.255.0
+default-router 192.168.30.254
+option 150 ip 192.168.100.1
+ip dhcp pool native
+network 192.168.1.0 255.255.255.0
+default-router 192.168.1.254
+option 43 ip 192.168.100.2
+ip dhcp pool Guest
+network 192.168.40.0 255.255.255.0
+default-router 192.168.40.254
+ip dhcp pool Employee
+network 192.168.5.0 255.255.255.0
+default-router 192.168.5.254
+telephony-service
+max-ephones 30
+max-dn 10
+ip source-address 192.168.100.1 port 2000
+auto assign 1 to 10
+ephone-dn 1
+number 18201
+ephone-dn 2
+number 18202
+ephone-dn 3
+number 18203
+ephone-dn 4
+number 18204
+ephone-dn 5
+number 18205
+ephone-dn 6
+number 18206
+ephone-dn 7
+number 18207
+ephone-dn 8
+number 18208
+do wr

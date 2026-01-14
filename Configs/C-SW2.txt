@@ -1,0 +1,22 @@
+en
+conf t
+hostname C-SW2
+ip routing
+int g1/0/2
+no switchport
+ip address 192.168.100.4 255.255.255.0
+int g1/0/3
+no switchport
+ip address 192.168.70.2 255.255.255.0
+int g1/0/4
+no switchport
+ip address 192.168.60.1 255.255.255.0
+int g1/0/5
+no switchport
+ip address 192.168.90.1 255.255.255.0
+router ospf 1
+network 192.168.100.0 0.0.0.255 area 0
+network 192.168.70.0 0.0.0.255 area 0
+network 192.168.60.0 0.0.0.255 area 0
+network 192.168.90.0 0.0.0.255 area 0
+do wr
